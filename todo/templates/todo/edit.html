@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Todo List</title>
+    <link rel="stylesheet" href="{% static 'todo/index.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="add">
+            <div class="heading">
+                <h1>Task List {{current_year}}</h1>
+            </div>
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="inputcontainer">
+                    <div class="input">
+                        <input type="text" name = "title" required placeholder={{task.title}} >
+                    </div>
+                    <div class="button">
+                        <input type="submit" value="+">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

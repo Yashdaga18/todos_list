@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <link rel="stylesheet" href="{% static 'todo/index.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="add">
+            {% if request.user.is_authenticated %}
+            <div class="heading">
+                <br>
+                <button style="background-color:rgb(217, 25, 86);padding:5px;border-radius:10px;float:right;"><a href="{% url 'logout' %}"> Logout</a></button>
+                <h1>Welcome </h1>
+                <h1>Task List {{current_year}} </h1>
+            </div>
+            
+            <form action="/" method="post">
+                {% csrf_token %}
+                <div class="inputcontainer">
+                    <div class="input">
+                        <input type="text" name = "title" required placeholder="What do you planned?">
+                    </div>
+                    <div class="button">
+                        <input type="submit" value="+">
+                    </div>
+                </div>
+            </form>
+            
+            {% else %}
+            <br>
+                <button style="background-color:rgb(217, 25, 86);padding:5px;border-radius:10px;"><a href="{% url 'login' %}"> Login</a></button>
+            {% endif %}
+        </div>
+    </div>
+    <div class="container">
+        {% if request.user.is_authenticated %}
+        <div class="listcontainer">
+            <div class="heading center">
+                <h1>Tasks</h1>
+            </div>
+            <hr>
+            <div id="tasks">
+                <ul class="no-bullets">
+                    {% if tasks %}
+                        {% for task in tasks  %}
+                            <div class="listgroup">
+                                <div id="list">
+                                    <li {% if task.is_complete %}class = "line-through"{% endif %}> {{task}} </li>
+                                </div>
+                                <div class="completed">
+                                    <button><a href="{% url 'completed' task.id %}">Completed</a></button>
+                                </div>
+                                <div class="edit">
+                                    <button><a href="{% url 'edit' task.id%}">Edit</a></button>
+                                </div>
+                                <div class="delete">
+                                    <button ><a href="{% url 'delete' task.id%}">Delete</a></button>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="heading center">
+                            <h2>No Tasks</h2>
+                        </div>
+                    {% endif %} 
+                </ul>
+            </div>
+        </div>
+        {% else %}
+            <div class="heading center">
+                <h2>No Tasks</h2>
+            </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>

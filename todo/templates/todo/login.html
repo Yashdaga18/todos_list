@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="{% static 'todo/index.css' %}">
+    <style>
+        input[type="submit"] {
+            width: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="add">
+            <div class="heading">
+                <h1>Login</h1>
+            </div>
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="registercontainer">
+                    <div class="input spacing">
+                        <input type="text" name = "username" required placeholder="Enter Your Username">
+                    </div>
+                    <div class="input spacing">
+                        <input type="password" name = "password" required placeholder="Enter your password">
+                    </div>
+                    <div class="input spacing">
+                        <a style="text-decoration:underline;" href ="{% url 'register' %}" >click here to register</a>
+                    </div>
+                    {% if error %}
+                        <div class="spacing">
+                            <p>{{error}}</p>
+                        </div>
+                    {% endif %}
+                    <div class="button spacing">
+                        <input type="submit" value="+">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="{% static 'todo/index.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="add">
+            <div class="heading">
+                <h1>Register</h1>
+            </div>
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="registercontainer">
+                    <div class="input spacing">
+                        <input type="text" name = "fname" required placeholder="Enter Your first name">
+                    </div>
+                    <div class="input spacing">
+                        <input type="text" name = "lname" required placeholder="Enter Your last name">
+                    </div>
+                    <div class="input spacing">
+                        <input type="text" name = "username" required placeholder="Enter Your Username">
+                    </div>
+                    <div class="input spacing">
+                        <input type="password" name = "password" required placeholder="Enter your password">
+                    </div>
+                    <div class="input spacing">
+                        <input type="password" name = "repassword" required placeholder="Reenter your password">
+                    </div>
+                    {% if samepassworderror %}
+                        <p> {{samepassworderror}} </p>
+                    {% endif %}
+                    {% if lengtherror %}
+                    <p> {{lengtherror}} </p>
+                    {% endif %}
+                    <div class="button spacing">
+                        <input type="submit" value="+">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
